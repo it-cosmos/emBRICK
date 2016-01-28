@@ -1,0 +1,56 @@
+with "bsp_naming.gpr";
+
+project Bsp is
+
+   for Source_List_File use "bsp_source_list.txt";
+   for Source_Dirs use (
+      "c:\users\hp\github\embrick\stm32_bsp\boards", 
+      "c:\users\hp\github\embrick\stm32_bsp\components", 
+      "c:\users\hp\github\embrick\stm32_bsp\devices", 
+      "c:\users\hp\github\embrick\stm32_bsp\drivers", 
+      "c:\users\hp\github\embrick\stm32_bsp\utils");
+   for Languages use ("ada");
+
+   package Naming renames Bsp_Naming.Naming;
+   for Object_Dir use "obj";
+
+   type Build_Modes is ("debug", "production");
+   Build_Mode : Build_Modes := external ("Build", "debug");
+
+   package Compiler is
+      case Build_Mode is
+         when "debug" =>
+            for Default_Switches ("ada") use
+              ("-g",
+               "-gnatwa",
+               "-gnata",   -- enable pre/postcondition checks
+               "-gnatQ",
+               "-gnatw.X");
+         when "production" =>
+            for Default_Switches ("ada") use
+              ("-O1",
+               "-gnatw.X");
+      end case;
+   end Compiler;
+   
+   
+   for Runtime ("Ada") use "ravenscar-sfp-stm32f4";
+
+   for Target use "arm-eabi";
+
+   package Builder is
+      for Global_Configuration_Pragmas use "gnat.adc";
+      case Build_Mode is
+         when "debug" =>
+            for Default_Switches ("ada") use ("-g");
+         when "production" =>
+            for Default_Switches ("ada") use ();
+      end case;
+   end Builder;
+
+   package Ide is
+      for Program_Host use "localhost:4242";
+      for Communication_Protocol use "remote";
+   end Ide;
+
+end Bsp;

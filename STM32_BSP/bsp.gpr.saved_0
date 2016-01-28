@@ -1,0 +1,7 @@
+project BSP is
+
+   for Source_Dirs use ("boards", "components", "devices", "drivers", "utils");
+   for Object_Dir use "obj";
+
+end BSP;
+
