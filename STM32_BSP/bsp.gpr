@@ -4,11 +4,11 @@ project Bsp is
 
    for Source_List_File use "bsp_source_list.txt";
    for Source_Dirs use (
-      "c:\users\hp\github\embrick\stm32_bsp\boards", 
-      "c:\users\hp\github\embrick\stm32_bsp\components", 
-      "c:\users\hp\github\embrick\stm32_bsp\devices", 
-      "c:\users\hp\github\embrick\stm32_bsp\drivers", 
-      "c:\users\hp\github\embrick\stm32_bsp\utils");
+      "boards",
+      "components",
+      "devices",
+      "drivers",
+      "utils");
    for Languages use ("ada");
 
    package Naming renames Bsp_Naming.Naming;
@@ -32,8 +32,8 @@ project Bsp is
                "-gnatw.X");
       end case;
    end Compiler;
-   
-   
+
+
    for Runtime ("Ada") use "ravenscar-sfp-stm32f4";
 
    for Target use "arm-eabi";
