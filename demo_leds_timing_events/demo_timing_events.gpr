@@ -1,11 +1,11 @@
-with "../STM32_BSP/BSP.gpr";
+with "../STM32_BSP/bsp.gpr";
 project Demo_Timing_Events is
 
    for Languages use ("Ada");
    for Main use ("demo_timing_events.adb");
-   
+
    for Source_Dirs use ("src");
-   
+
    for Object_Dir use "obj";
 
    type Build_Modes is ("debug", "production");
@@ -26,8 +26,7 @@ project Demo_Timing_Events is
                "-gnatw.X");
       end case;
    end Compiler;
-   
-   
+
    for Runtime ("Ada") use "ravenscar-sfp-stm32f4";
 
    for Target use "arm-eabi";
