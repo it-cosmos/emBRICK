@@ -1,0 +1,3 @@
+[submodule "STM32_BSP/drivers"]
+	path = STM32_BSP/drivers
+	url = git://github.com/AdaCore/bareboard.git

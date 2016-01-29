@@ -4,11 +4,11 @@ project Bsp is
 
    for Source_List_File use "bsp_source_list.txt";
    for Source_Dirs use (
-      "boards",
-      "components",
-      "devices",
-      "drivers",
-      "utils");
+      "drivers/ARM/STMicro/STM32/boards",
+      "drivers/ARM/STMicro/STM32/components",
+      "drivers/ARM/STMicro/STM32/devices",
+      "drivers/ARM/STMicro/STM32/drivers",
+      "drivers/ARM/STMicro/STM32/utils");
    for Languages use ("ada");
 
    package Naming renames Bsp_Naming.Naming;
