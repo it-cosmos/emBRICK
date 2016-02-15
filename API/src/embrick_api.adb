@@ -1,5 +1,8 @@
+with STM32F4.SPI;
+with STM32F4_Discovery; use STM32F4_Discovery;
 package body embrick_api is
 
+   package SPI renames STM32F4.SPI;
    ---------------------------------------
    -- bB_Init ----------------------------
    --   The function initializes IOs, SPI 			*
@@ -8,8 +11,19 @@ package body embrick_api is
    --   returns SUCCESS or FAILURE
    ---------------------------------------
    function bB_Init return Failure_Or_Success is
-      --
+      use SPI;
+      conf : SPI.SPI_Configuration := (Direction           => D2Lines_FullDuplex,
+                                       Mode                => Master,
+                                       Data_Size           => Data_16,
+                                       Clock_Polarity      => High,
+                                       Clock_Phase         => P1Edge,
+                                       Slave_Management    => Software_Managed,
+                                       Baud_Rate_Prescaler => BRP_128,
+                                       First_Bit           => MSB,
+                                       CRC_Poly => 0);
+      p : SPI_Port;
    begin
+      Configure(p, conf);
       return SUCCESS;
    end;
 
@@ -208,7 +222,7 @@ package body embrick_api is
    --     bB_bit: bit to be written *0,1)
    ----------------------------------------------
    procedure bB_putBit (node: node_type; slave_No: module_type;
-                        byte_pos: byte_pos_type; bit_pos: byte_pos_type; bB_bit: bB_bit_type) is
+                        byte_pos: byte_pos_type; bit_pos: bit_pos_type; bB_bit: bB_bit_type) is
    begin
       null;
    end;

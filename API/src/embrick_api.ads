@@ -42,6 +42,6 @@ package emBRICK_API is
    procedure bB_putByte (node: node_type; slave_No: module_type;
                          byte_pos: byte_pos_type; bB_byte: bB_byte_type);
    procedure bB_putBit (node: node_type; slave_No: module_type;
-                         byte_pos: byte_pos_type; bit_pos: byte_pos_type; bB_byte: bB_bit_type);
+                         byte_pos: byte_pos_type; bit_pos: bit_pos_type; bB_bit: bB_bit_type);
 
 end emBRICK_API;
